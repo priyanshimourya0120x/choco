@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Day Surprise 🍫</title>
+
+<style>
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+/* ================= BODY ================= */
+body{
+  width:100%;
+  height:100vh;
+  background:radial-gradient(circle at top,#1b2735,#090a0f);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* ================= COMMON ================= */
+.hidden{display:none}
+
+/* ================= OPEN BUTTON ================= */
+.open-btn{
+  padding:22px 45px;
+  font-size:22px;
+  border:none;
+  border-radius:50px;
+  background:#ff4d88;
+  color:white;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.12)}
+}
+
+/* ================= PAGE 1 ================= */
+.page{
+  width:420px;
+  max-width:95%;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px);
+  border-radius:30px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 30px 60px rgba(0,0,0,0.6);
+  animation:pop 0.8s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(0.6);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.heading{
+  font-size:28px;
+  font-weight:900;
+  text-shadow:0 0 12px #ff9ecb,0 0 26px #ff4d88;
+}
+
+.photo{
+  width:180px;
+  height:180px;
+  border-radius:22px;
+  margin:18px auto;
+  object-fit:cover;
+  animation:dance 1.2s infinite;
+  box-shadow:0 15px 30px rgba(0,0,0,0.6);
+}
+
+@keyframes dance{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(3deg)}
+  50%{transform:rotate(-3deg)}
+  100%{transform:rotate(0)}
+}
+
+#letter{
+  min-height:100px;
+  font-size:15px;
+  margin:10px 0;
+}
+
+.buttons button{
+  padding:11px 20px;
+  margin:6px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d88;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* ================= PAGE 2 ================= */
+.next-page{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top,#2a1a0f,#0c0703);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:10;
+}
+
+.typing-text{
+  font-size:30px;
+  font-weight:900;
+  color:#ffb3c6;
+  text-shadow:0 0 15px #ff4d88;
+  min-height:90px;
+  text-align:center;
+}
+
+.back-btn{
+  margin-top:30px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d88;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* ================= ROSE RAIN ================= */
+.rose{
+  position:absolute;
+  font-size:26px;
+  animation:fall 6s linear forwards;
+}
+
+@keyframes fall{
+  from{top:-40px;opacity:1}
+  to{top:110vh;opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPEN -->
+<button class="open-btn" id="openBtn" onclick="openPage1()">
+  🍫 Open Chocolate
+</button>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page hidden" id="page1">
+
+  <div class="heading">Happy Chocolate Day 🍫💖</div>
+
+  <!-- OPTIONAL IMAGE -->
+<video class="photo" loop muted controls>
+  <source src="vedio chocolate.mp4" type="video/mp4">
+</video>
+
+
+  <div id="letter"></div>
+
+  <div class="buttons">
+    <button onclick="goNext()">🍫 Eat Chocolate</button>
+  </div>
+
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="next-page" id="page2">
+  <div class="typing-text" id="typing"></div>
+  <button class="back-btn" onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+/* ================= TEXT ================= */
+const page1Text = `
+Chocolate sirf ek sweet nahi 🍫
+yeh ek feeling hai 💖
+jo sirf tumhare saath special lagti hai 😌 tu agar saath hai to duniya se dar nahi lagta .... har jeet jeet jaungi .... tu nahi to duniya ka hona bhi na hona hai ....
+`;
+
+const nextPageText = "Hey Madma Ji, eat this chocolate 🍫";
+
+let i = 0;
+let j = 0;
+
+/* ================= PAGE 1 ================= */
+function openPage1(){
+  openBtn.style.display = "none";
+  page1.classList.remove("hidden");
+  typePage1();
+  setInterval(roseRain,450);
+}
+
+function typePage1(){
+  if(i < page1Text.length){
+    letter.innerHTML += page1Text.charAt(i++);
+    setTimeout(typePage1,35);
+  }
+}
+
+/* ================= PAGE 2 ================= */
+function goNext(){
+  page1.style.display="none";
+  page2.style.display="flex";
+  typing.innerHTML="";
+  j = 0;
+  typeNext();
+}
+
+function typeNext(){
+  if(j < nextPageText.length){
+    typing.innerHTML += nextPageText.charAt(j++);
+    setTimeout(typeNext,80);
+  }
+}
+
+function goBack(){
+  page2.style.display="none";
+  page1.style.display="block";
+}
+
+/* ================= ROSE ================= */
+function roseRain(){
+  const r = document.createElement("div");
+  r.className="rose";
+  r.innerHTML="🌹";
+  r.style.left=Math.random()*100+"vw";
+  document.body.appendChild(r);
+  setTimeout(()=>r.remove(),6000);
+}
+</script>
+
+</body>
+</html>

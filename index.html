@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Day Cinematic Love 🍫🌙</title>
+
+<!-- =========================
+        GLOBAL STYLES
+========================= -->
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* BODY */
+body{
+  width:100%;
+  height:100vh;
+  background:radial-gradient(circle at top,#1b2735,#090a0f);
+  font-family:'Segoe UI',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#ffffff;
+}
+
+/* =========================
+        OPEN BUTTON
+========================= */
+.open-btn{
+  padding:22px 46px;
+  font-size:22px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(45deg,#ff4d88,#ff7aa2);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 20px 40px rgba(255,77,136,0.4);
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.12)}
+  100%{transform:scale(1)}
+}
+
+/* =========================
+        MAIN CARD
+========================= */
+.card{
+  display:none;
+  width:550px; /* Increased width from 420px */
+  max-width:95%; /* Adjusted max-width for better responsiveness */
+  padding:20px; /* Reduced padding from 28px to make height shorter */
+  border-radius:32px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px);
+  box-shadow:0 35px 70px rgba(0,0,0,0.6);
+  text-align:center;
+  animation:cardPop 0.9s ease;
+}
+
+@keyframes cardPop{
+  from{transform:scale(0.6);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* =========================
+        HEADING
+========================= */
+.heading{
+  font-size:28px; /* Slightly reduced font-size to help with height */
+  font-weight:900;
+  margin-bottom:8px; /* Reduced margin */
+  text-shadow:0 0 12px #ff9ecb,0 0 26px #ff4d88;
+}
+
+/* =========================
+        NAME INPUT
+========================= */
+.name-input{
+  margin:10px 0; /* Reduced margin */
+}
+
+.name-input input{
+  width:90%;
+  padding:10px; /* Reduced padding */
+  border:none;
+  border-radius:25px;
+  outline:none;
+  font-size:14px;
+}
+
+.name-display{
+  margin-top:6px; /* Reduced margin */
+  font-size:18px; /* Slightly reduced font-size */
+  font-weight:700;
+  color:#ff9ecb;
+}
+
+/* =========================
+        IMAGE
+========================= */
+.photo{
+  width:170px; /* Reduced size to help with height */
+  height:170px; /* Reduced size to help with height */
+  margin:15px auto; /* Reduced margin */
+  border-radius:22px;
+  object-fit:cover;
+  box-shadow:0 15px 30px rgba(0,0,0,0.6);
+  animation:dance 1.2s infinite;
+}
+
+@keyframes dance{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(3deg)}
+  50%{transform:rotate(-3deg)}
+  100%{transform:rotate(0)}
+}
+
+.stop-dance{
+  animation:none;
+}
+
+/* =========================
+        CHOCOLATE BOX
+========================= */
+.choco-box{
+  font-size:60px; /* Reduced size to help with height */
+  cursor:pointer;
+  margin:8px 0; /* Reduced margin */
+  animation:shake 1s infinite;
+}
+
+@keyframes shake{
+  50%{transform:rotate(6deg)}
+}
+
+.choco-inside{
+  display:none;
+  font-size:26px; /* Reduced size */
+  margin-bottom:8px; /* Reduced margin */
+}
+
+/* =========================
+        LETTER TEXT
+========================= */
+#letter{
+  min-height:100px; /* Reduced min-height */
+  font-size:14px; /* Slightly reduced font-size */
+  line-height:1.4; /* Adjusted line-height */
+  margin:8px 0; /* Reduced margin */
+}
+
+/* =========================
+        BUTTONS
+========================= */
+.buttons{
+  margin-top:8px; /* Reduced margin */
+}
+
+.buttons button, .buttons a{
+  padding:10px 18px; /* Reduced padding */
+  margin:5px; /* Reduced margin */
+  border:none;
+  border-radius:25px;
+  background:#ff4d88;
+  color:white;
+  font-size:13px; /* Slightly reduced font-size */
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+}
+
+/* =========================
+        ROSE RAIN
+========================= */
+.rose{
+  position:absolute;
+  font-size:26px;
+  animation:fall 6s linear forwards;
+}
+
+@keyframes fall{
+  from{top:-40px;opacity:1}
+  to{top:110vh;opacity:0}
+}
+
+/* =========================
+        POPUP
+========================= */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:100;
+}
+
+.popup-box{
+  width:320px; /* Slightly increased for better fit */
+  padding:24px; /* Adjusted padding */
+  border-radius:26px;
+  background:#1b2735;
+  text-align:center;
+  animation:cardPop 0.5s ease;
+}
+
+.popup-box button{
+  margin:6px;
+  padding:10px 18px;
+  border:none;
+  border-radius:22px;
+  background:#ff4d88;
+  color:white;
+  cursor:pointer;
+}
+
+/* =========================
+        MUSIC ICON
+========================= */
+.music-btn{
+  position:fixed;
+  top:18px;
+  right:18px;
+  font-size:26px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+        MUSIC TOGGLE
+========================= -->
+<div class="music-btn" onclick="App.toggleMusic()">🎵</div>
+
+<!-- =========================
+        OPEN BUTTON
+========================= -->
+<button class="open-btn" id="openBtn" onclick="App.openCard()">
+  🍫 Open Love
+</button>
+
+<!-- =========================
+        CARD
+========================= -->
+<div class="card" id="card">
+
+  <div class="heading">Happy Chocolate Day 🍫🌙</div>
+
+  <div class="name-input">
+    <input type="text" id="nameInput" placeholder="Enter Her Name 💖">
+    <div class="name-display" id="nameDisplay">My Love 💕</div>
+  </div>
+
+  <img src="pyaar bhari image.jpeg" class="photo" id="photo">
+
+  <div class="choco-box" id="box">🧁</div>
+  <div class="choco-inside" id="inside">🍫 💖 🍬</div>
+
+  <div id="letter"></div>
+
+  <div class="buttons">
+    <button onclick="App.toggleDance()">💃 Dance</button>
+    <button onclick="App.propose()">💍 Propose</button>
+    <button onclick="App.toggleMusic()">🎶 Music</button>
+    <a href="choco.html" target="_blank">Click here to eat chocolate</a>
+  </div>
+
+</div>
+
+<!-- =========================
+        POPUP
+========================= -->
+<div class="popup" id="popup">
+  <div class="popup-box" id="popupBox"></div>
+</div>
+
+<!-- =========================
+        MUSIC
+========================= -->
+<audio id="bgm" loop autoplay>
+  <source src="yaara teri yaari ko .mp4" type="audio/mpeg">
+</audio>
+
+<!-- =========================
+        SCRIPT
+========================= -->
+<script>
+
+/* =========================
+        MAIN APP OBJECT
+========================= */
+const App = {
+
+  text: `
+Tum meri zindagi ki sabse pyari mithaas ho 🍫💖
+Tumhari muskurahat meri favourite feeling hai 😌
+Aaj Chocolate Day hai…
+aur kal, parson, hamesha tum, thi tu hai , tu hi rahegi . mujhe nahi pta mene utjhe samjha ya nahi mene mene galtiyon kri  kuch tujhe hurt hua but sorry .... mere pass paise nahi hai isliye efforts kar rhi hu . ❤️
+`,
+
+  index:0,
+  music:true,
+  dancing:true,
+
+  openCard(){
+    document.getElementById("openBtn").style.display="none";
+    document.getElementById("card").style.display="block";
+    this.typeText();
+    setInterval(this.roseRain,450);
+  },
+
+  typeText(){
+    if(this.index < this.text.length){
+      letter.innerHTML += this.text.charAt(this.index++);
+      setTimeout(()=>this.typeText(),35);
+    }
+  },
+
+  updateName(){
+    nameDisplay.innerText = nameInput.value || "My Love 💕";
+  },
+
+  toggleDance(){
+    this.dancing=!this.dancing;
+    photo.classList.toggle("stop-dance");
+  },
+
+  toggleMusic(){
+    const bgm=document.getElementById("bgm");
+    this.music ? bgm.pause() : bgm.play();
+    this.music=!this.music;
+  },
+
+  roseRain(){
+    const r=document.createElement("div");
+    r.className="rose";
+    r.innerHTML="🌹";
+    r.style.left=Math.random()*100+"vw";
+    document.body.appendChild(r);
+    setTimeout(()=>r.remove(),6000);
+  },
+
+  openBox(){
+    box.style.display="none";
+    inside.style.display="block";
+  },
+
+  propose(){
+    popup.style.display="flex";
+    popupBox.innerHTML=`
+      <h2>💍 Will You Be Mine Forever?</h2>
+      <p>You are my favourite sweetness 🍫💖</p>
+      <button onclick="App.yes()">YES 😍</button>
+      <button onclick="App.no()">NO 🙈</button>
+      <br><br>
+      <button onclick="App.closePopup()">❌ Close</button>
+    `;
+  },
+
+  yes(){
+    popupBox.innerHTML=`
+      <h2>💖 SHE SAID YES 💖</h2>
+      <p>Forever starts now 🌙🍫</p>
+      <button onclick="App.closePopup()">✨ Close</button>
+    `;
+    sendWhatsApp("yes");
+  },
+
+  no(){
+    popupBox.innerHTML=`
+      <h2>🙈 It's Okay</h2>
+      <p>Still wishing you a sweet Chocolate Day 🍫💖</p>
+      <button onclick="App.closePopup()">❌ Close</button>
+    `;
+    sendWhatsApp("no");
+  },
+
+  closePopup(){
+    popup.style.display="none";
+  }
+
+};
+
+/* =========================
+        EVENTS
+========================= */
+nameInput.addEventListener("input",()=>App.updateName());
+box.addEventListener("click",()=>App.openBox());
+
+function sendWhatsApp(response){
+  const number = "9310688455"; // Replace with actual WhatsApp number (e.g., 919876543210 for India)
+  let message = "";
+
+  if(response === "yes"){
+    message = "She said YES! 💖 jaise aap kahe vo hi karungi! 🍫🌙😍";
+  } else if(response === "no"){
+    message = "She said NO 🙈, jaisa aap chahe vo hi hoga but merre past ki hr ek moemories ko dhek kr aapko nahi lagta aapko atleast one tiem try kanra chahiye! 🍫💖😉";
+  }
+
+  const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+</script>
+
+</body>
+</html>
